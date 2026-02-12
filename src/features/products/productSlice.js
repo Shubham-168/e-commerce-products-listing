@@ -34,6 +34,7 @@ const initialState = {
   products: [],
   filteredProducts: [],
   activeCategory: "women's clothing",
+  viewType: 'grid',
   status: 'idle',
   error: null,
 }
@@ -48,6 +49,9 @@ const productSlice = createSlice({
     },
     filterProducts: (state, action) => {
       state.filteredProducts = filterByCategory(state.products, action.payload)
+    },
+    setViewType: (state, action) => {
+      state.viewType = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -68,5 +72,5 @@ const productSlice = createSlice({
   },
 })
 
-export const { setActiveCategory, filterProducts } = productSlice.actions
+export const { setActiveCategory, filterProducts, setViewType } = productSlice.actions
 export default productSlice.reducer

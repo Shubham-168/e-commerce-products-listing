@@ -33,3 +33,8 @@ export const selectProductError = createSelector(
   [selectProductState],
   (productsState) => productsState.error,
 )
+
+export const selectViewType = createSelector(
+  [selectProductState],
+  (productsState) => productsState.viewType,
+)

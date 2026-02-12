@@ -9,6 +9,7 @@ import {
   fetchProducts,
   queryToCategoryMap,
   setActiveCategory,
+  setViewType,
 } from '../features/products/productSlice'
 import {
   selectActiveCategory,
@@ -17,6 +18,7 @@ import {
   selectProductError,
   selectProducts,
   selectProductStatus,
+  selectViewType,
 } from '../features/products/productSelectors'
 
 function LandingPage() {
@@ -26,6 +28,7 @@ function LandingPage() {
   const products = useSelector(selectProducts)
   const filteredProducts = useSelector(selectFilteredProducts)
   const activeCategory = useSelector(selectActiveCategory)
+  const viewType = useSelector(selectViewType)
   const categoryCounts = useSelector(selectCategoryCounts)
   const status = useSelector(selectProductStatus)
   const error = useSelector(selectProductError)
@@ -53,6 +56,10 @@ function LandingPage() {
     })
   }
 
+  const handleViewChange = (newViewType) => {
+    dispatch(setViewType(newViewType))
+  }
+
   if (status === 'failed') {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
@@ -64,15 +71,23 @@ function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex flex-col h-screen bg-gray-50">
       <Navbar />
-      <div className="grid grid-cols-1 gap-6 px-6 py-6 lg:grid-cols-[260px_1fr]">
-        <Sidebar
-          activeCategory={activeCategory}
-          categoryCounts={categoryCounts}
-          onCategoryChange={handleCategoryChange}
-        />
-        <ProductGrid products={filteredProducts} totalProducts={products.length} status={status} />
+      <div className="h-[calc(100vh-80px)] overflow-hidden">
+        <div className="grid grid-cols-1 gap-6 h-full px-6 py-6 lg:grid-cols-[260px_1fr]">
+          <Sidebar
+            activeCategory={activeCategory}
+            categoryCounts={categoryCounts}
+            onCategoryChange={handleCategoryChange}
+          />
+          <ProductGrid
+            products={filteredProducts}
+            totalProducts={products.length}
+            status={status}
+            viewType={viewType}
+            onViewChange={handleViewChange}
+          />
+        </div>
       </div>
     </div>
   )

@@ -1,19 +1,49 @@
-const navLinks = ['Our product', 'New arrivals', 'Collections', 'About us']
+import { useNavigate } from 'react-router-dom'
 
-const iconButtonClass = 'rounded-full p-2 transition hover:bg-gray-100'
+const navLinks = [
+  { label: 'Our product', path: '/' },
+  { label: 'New arrivals', path: '/new-arrivals' },
+  { label: 'Collections', path: '/collections' },
+  { label: 'About us', path: '/about' },
+]
+
+const iconButtonClass = 'cursor-pointer rounded-full p-2 transition hover:bg-gray-100'
 
 function Navbar() {
+  const navigate = useNavigate()
+  const currentPath = window.location.pathname
+
+  const handleNavClick = (path) => {
+    navigate(path)
+  }
+
   return (
     <nav className="sticky top-0 z-20 border-b border-gray-200 bg-white/95 px-6 backdrop-blur">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">TrendHive</h1>
+        <h1
+          onClick={() => handleNavClick('/')}
+          className="cursor-pointer text-3xl font-bold tracking-tight text-gray-900 transition hover:text-gray-700"
+        >
+          TrendHive
+        </h1>
 
-        <ul className="hidden items-center gap-10 text-base font-medium text-gray-700 md:flex">
-          {navLinks.map((item) => (
-            <li key={item} className="cursor-pointer transition-colors hover:text-gray-900">
-              {item}
-            </li>
-          ))}
+        <ul className="hidden items-center gap-0 text-base font-medium text-gray-700 md:flex">
+          {navLinks.map((item) => {
+            const isActive = currentPath === item.path
+            return (
+              <li
+                key={item.label}
+                onClick={() => handleNavClick(item.path)}
+                className={`cursor-pointer flex h-20 flex-col items-center justify-center border-b-2 px-4 transition-colors ${
+                  isActive
+                    ? 'border-b-2 border-black text-gray-900'
+                    : 'border-b-2 border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-900'
+                }`}
+              >
+                {item.label}
+              </li>
+            )
+          })}
         </ul>
 
         <div className="flex items-center gap-4 text-gray-700">
@@ -35,7 +65,7 @@ function Navbar() {
               <circle cx="17" cy="19" r="1.4" />
             </svg>
           </button>
-          <button className="rounded-full bg-lime-300 px-7 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-lime-400">
+          <button className="cursor-pointer rounded-full bg-lime-300 px-7 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-lime-400">
             Login
           </button>
         </div>
