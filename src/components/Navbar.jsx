@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const navLinks = [
@@ -9,7 +10,7 @@ const navLinks = [
 
 const iconButtonClass = 'cursor-pointer rounded-full p-2 transition hover:bg-gray-100'
 
-function Navbar() {
+function Navbar({ onHamburgerClick }) {
   const navigate = useNavigate()
   const currentPath = window.location.pathname
 
@@ -18,15 +19,16 @@ function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-20 border-b border-gray-200 bg-white/95 px-6 backdrop-blur">
+    <nav className="fixed top-0 z-20 border-b w-full border-gray-200 bg-white/95 px-4 md:px-6 backdrop-blur">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between">
         <h1
           onClick={() => handleNavClick('/')}
-          className="cursor-pointer text-3xl font-bold tracking-tight text-gray-900 transition hover:text-gray-700"
+          className="cursor-pointer text-lg md:text-3xl font-bold tracking-tight text-gray-900 transition hover:text-gray-700 flex-shrink-0"
         >
           TrendHive
         </h1>
 
+        {/* Desktop Navigation */}
         <ul className="hidden items-center gap-0 text-base font-medium text-gray-700 md:flex">
           {navLinks.map((item) => {
             const isActive = currentPath === item.path
@@ -46,7 +48,8 @@ function Navbar() {
           })}
         </ul>
 
-        <div className="flex items-center gap-4 text-gray-700">
+        {/* Desktop Icons and Login */}
+        <div className="hidden items-center gap-4 text-gray-700 md:flex">
           <button className={iconButtonClass} aria-label="Search">
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
               <circle cx="11" cy="11" r="7" />
@@ -69,6 +72,17 @@ function Navbar() {
             Login
           </button>
         </div>
+
+        {/* Mobile Hamburger Menu */}
+        <button
+          onClick={onHamburgerClick}
+          className="cursor-pointer rounded-lg p-2 transition hover:bg-gray-100 md:hidden"
+          aria-label="Open menu"
+        >
+          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
     </nav>
   )
