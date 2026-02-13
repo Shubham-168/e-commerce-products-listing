@@ -1,12 +1,194 @@
-# React + Vite
+# 🛍️ TrendHive — Product Listing Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive **Product Listing Web Application** built as part of the **TapGro Frontend Assessment**.
 
-Currently, two official plugins are available:
+The application fetches products from a public API and displays them in a clean ecommerce-style interface with responsive layouts, filtering, and product detail navigation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🔗 **Live Production URL:**  
+https://e-commerce-products-listing-murex.vercel.app
+
+📂 **GitHub Repository:**  
+https://github.com/Shubham-168/e-commerce-products-listing.git
+
+---
+
+## 📌 Objective
+
+Build a simple Product Listing Web Application using React that:
+
+- Fetches product data from API
+- Displays products in a grid layout
+- Shows product details clearly
+- Handles loading and error states properly
+- Works across different screen sizes
+
+---
+
+## 🧰 Tech Stack
+
+- **React (Vite)**
+- **Redux Toolkit**
+- **Tailwind CSS**
+- **React Router DOM**
+- **SweetAlert2**
+- **FakeStore API**
+
+---
+
+## 🌐 API Used
+
+Public API:
+
+
+https://fakestoreapi.com/products
+
+
+No backend was used for this project.
+
+---
+
+## ✨ Features
+
+### ✅ Product Listing
+- Fetch products from API
+- Responsive grid layout
+- Product cards include:
+  - Product Image
+  - Title
+  - Price
+  - Category
+  - Rating
+- Loading indicator while fetching data
+- User-friendly error handling
+
+---
+
+### ✅ Category Filtering
+- Sidebar category filtering
+- Default category selected on load
+- Instant filtering without refetching API
+
+---
+
+### ✅ Grid / List View
+- Toggle between grid and list view
+- List view shows extended product information
+
+---
+
+### ✅ Responsive Design
+- Fully responsive layout
+- Desktop:
+  - Left sidebar + product grid
+- Mobile:
+  - Sidebar opens as right-side drawer
+  - Hamburger navigation
+
+---
+
+### ✅ Product Details Page
+- Click on product card to view details
+- Larger banner image
+- Full product description
+- Category, rating and pricing details
+
+---
+
+### ✅ Login Modal (UI Feature)
+- Login popup modal
+- Form validation
+- User data stored in localStorage
+- Login button replaced with avatar after login
+- SweetAlert success message on login
+
+---
+
+### ✅ UX Improvements
+- Fixed layout height
+- Only product cards scrollable
+- Accordion sidebar (Collections & Categories)
+- Smooth transitions and hover effects
+- Cursor pointer for all clickable elements
+
+---
+
+## 📁 Project Structure
+
+
+src/
+│
+├── components/
+│ ├── Navbar.jsx
+│ ├── Sidebar.jsx
+│ ├── LoginModal.jsx
+│ ├── ProductCard.jsx
+│ ├── ProductListCard.jsx
+│ └── ViewToggle.jsx
+│
+├── pages/
+│ ├── LandingPage.jsx
+│ └── ProductDetails.jsx
+│
+├── features/
+│ └── products/
+│ └── productSlice.js
+│
+├── app/
+│ └── store.js
+│
+└── App.jsx
+
+
+---
+
+## ⚙️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Shubham-168/e-commerce-products-listing.git
+
+Navigate to project folder:
+
+cd trendhive
+
+Install dependencies:
+
+npm install
+
+Run development server:
+
+npm run dev
+📱 Responsive Behavior
+Screen Size	Layout
+Large Screens	Sidebar + Product Grid
+Medium & Small	Hamburger Menu + Drawer Sidebar
+✅ Assessment Requirements Covered
+
+Fetch & display products from API
+
+Grid layout implementation
+
+Product image, title, price, category display
+
+Loading indicator
+
+API error handling
+
+GitHub repository submission
+
+Live deployed application
+
+👨‍💻 Author
+
+Shubham Saini
+
+Frontend Developer (React / Next.js)
+
+🙌 Acknowledgment
+
+Thanks to TapGro for the opportunity to work on this frontend assessment.
