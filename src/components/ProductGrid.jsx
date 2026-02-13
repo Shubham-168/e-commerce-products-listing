@@ -7,7 +7,7 @@ function ProductGrid({ products, totalProducts, status, viewType, onViewChange, 
   return (
     <section className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="flex-shrink-0 border-b border-gray-200 bg-white px-4 md:px-6 py-4">
+      <div className="flex-shrink-0 backdrop-blur rounded-2xl bg-white/50 px-4 md:px-6 py-4">
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1">
             <h2 className="text-xs md:text-sm font-medium text-gray-500">
@@ -20,7 +20,7 @@ function ProductGrid({ products, totalProducts, status, viewType, onViewChange, 
             {/* Mobile Menu Button */}
             <button
               onClick={onMobileMenuClick}
-              className="cursor-pointer lg:hidden rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100"
+              className="cursor-pointer hidden rounded-lg border border-gray-300 p-2 transition hover:bg-gray-100"
               aria-label="Open filters"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">

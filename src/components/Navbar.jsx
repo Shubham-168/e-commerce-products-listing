@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const navLinks = [
@@ -10,12 +9,16 @@ const navLinks = [
 
 const iconButtonClass = 'cursor-pointer rounded-full p-2 transition hover:bg-gray-100'
 
-function Navbar({ onHamburgerClick }) {
+function Navbar({ onMenuClick, onLoginClick, user }) {
   const navigate = useNavigate()
   const currentPath = window.location.pathname
 
   const handleNavClick = (path) => {
     navigate(path)
+  }
+
+  const getAvatarLetter = () => {
+    return user?.name?.charAt(0).toUpperCase() || 'U'
   }
 
   return (
@@ -68,14 +71,23 @@ function Navbar({ onHamburgerClick }) {
               <circle cx="17" cy="19" r="1.4" />
             </svg>
           </button>
-          <button className="cursor-pointer rounded-full bg-lime-300 px-7 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-lime-400">
-            Login
-          </button>
+          {user ? (
+            <div className="cursor-pointer w-9 h-9 rounded-full bg-lime-300 flex items-center justify-center font-semibold text-gray-900 transition hover:bg-lime-400">
+              {getAvatarLetter()}
+            </div>
+          ) : (
+            <button
+              onClick={onLoginClick}
+              className="cursor-pointer rounded-full bg-lime-300 px-7 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-lime-400"
+            >
+              Login
+            </button>
+          )}
         </div>
 
         {/* Mobile Hamburger Menu */}
         <button
-          onClick={onHamburgerClick}
+          onClick={onMenuClick}
           className="cursor-pointer rounded-lg p-2 transition hover:bg-gray-100 md:hidden"
           aria-label="Open menu"
         >

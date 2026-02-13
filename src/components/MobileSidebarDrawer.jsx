@@ -1,13 +1,16 @@
-import { useState } from 'react'
 import Accordion from './Accordion'
 import { CATEGORY_OPTIONS } from '../features/products/productSlice'
 
 const collectionTags = ['All', 'Best sellers', 'New arrivals', 'Accessories']
 
-function MobileSidebarDrawer({ isOpen, onClose, activeCategory, categoryCounts, onCategoryChange }) {
+function MobileSidebarDrawer({ isOpen, onClose, activeCategory, categoryCounts, onCategoryChange, user }) {
   const handleCategorySelect = (categoryValue) => {
     onCategoryChange(categoryValue)
     onClose() // Close drawer after selection on mobile
+  }
+
+  const getAvatarLetter = () => {
+    return user?.name?.charAt(0).toUpperCase() || 'U'
   }
 
   return (
@@ -79,9 +82,18 @@ function MobileSidebarDrawer({ isOpen, onClose, activeCategory, categoryCounts, 
         </div>
 
         <div className="border-t border-gray-200 p-6">
-          <button className="w-full cursor-pointer rounded-full bg-lime-300 px-6 py-3 text-sm font-semibold text-gray-900 transition hover:bg-lime-400">
-            Login
-          </button>
+          {user ? (
+            <div className="flex items-center gap-3 justify-center">
+              <div className="cursor-pointer w-10 h-10 rounded-full bg-lime-300 flex items-center justify-center font-semibold text-gray-900">
+                {getAvatarLetter()}
+              </div>
+              <span className="text-sm font-medium text-gray-900">{user.name}</span>
+            </div>
+          ) : (
+            <button className="w-full cursor-pointer rounded-full bg-lime-300 px-6 py-3 text-sm font-semibold text-gray-900 transition hover:bg-lime-400">
+              Login
+            </button>
+          )}
         </div>
       </aside>
     </>

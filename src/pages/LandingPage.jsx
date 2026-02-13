@@ -21,10 +21,9 @@ import {
   selectViewType,
 } from '../features/products/productSelectors'
 
-function LandingPage({ onHamburgerClick }) {
+function LandingPage({ isSidebarOpen, onCloseSidebar, onOpenSidebar, user }) {
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false)
 
   const products = useSelector(selectProducts)
   const filteredProducts = useSelector(selectFilteredProducts)
@@ -50,7 +49,7 @@ function LandingPage({ onHamburgerClick }) {
   }, [dispatch, status])
 
   useEffect(() => {
-    if (isMobileDrawerOpen) {
+    if (isSidebarOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'unset'
@@ -59,7 +58,7 @@ function LandingPage({ onHamburgerClick }) {
     return () => {
       document.body.style.overflow = 'unset'
     }
-  }, [isMobileDrawerOpen])
+  }, [isSidebarOpen])
 
   const handleCategoryChange = (categoryValue) => {
     dispatch(setActiveCategory(categoryValue))
@@ -74,7 +73,11 @@ function LandingPage({ onHamburgerClick }) {
   }
 
   const handleMobileDrawerToggle = () => {
-    setIsMobileDrawerOpen(!isMobileDrawerOpen)
+    if (isSidebarOpen) {
+      onCloseSidebar()
+    } else {
+      onOpenSidebar()
+    }
   }
 
   if (status === 'failed') {
@@ -95,7 +98,7 @@ function LandingPage({ onHamburgerClick }) {
       {/* Main content area */}
       <div className="flex h-[calc(100vh-80px)] overflow-hidden">
         {/* Desktop Sidebar */}
-        <div className="hidden lg:block lg:w-[260px] gap-2 flex-shrink-0 overflow-auto border-r border-gray-200 bg-white">
+        <div className="hidden lg:block lg:w-[260px] flex-shrink-0 overflow-auto border-r rounded-3xl border-gray-200 bg-white">
           <div className="p-6">
             <Sidebar
               activeCategory={activeCategory}
@@ -107,11 +110,12 @@ function LandingPage({ onHamburgerClick }) {
 
         {/* Mobile Drawer */}
         <MobileSidebarDrawer
-          isOpen={isMobileDrawerOpen}
-          onClose={handleMobileDrawerToggle}
+          isOpen={isSidebarOpen}
+          onClose={onCloseSidebar}
           activeCategory={activeCategory}
           categoryCounts={categoryCounts}
           onCategoryChange={handleCategoryChange}
+          user={user}
         />
 
         {/* Product Grid */}
